@@ -27,8 +27,14 @@ security:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
 
-            logout: true
+            logout:
+              path: /logout
+              target: index
+
             anonymous: true
+            form_login:
+              login_path: login
+              check_path: login
             # activate different ways to authenticate
 
             # http_basic: ~
