@@ -1,13 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link href="{{ asset('Css/syle.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('Css/style.css') }}" type="text/css" rel="stylesheet" />
 {% endblock %}
 
 {% block body %}
     <div id="wrapper">
+        <div class="topBar"></div>
         <div id="container">
-            test
+            {% block header %}
+                <div id="header">
+                    <div id="nav">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Home
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endblock %}
         </div>
     </div>
 {% endblock %}
