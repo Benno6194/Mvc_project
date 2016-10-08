@@ -12,15 +12,34 @@
                 <div id="header">
                     <div id="nav">
                         <ul>
-                            <li>
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
+                            <li><a class="webTitle" href="{{ path('index') }}">Task Manager </a></li>
+                            <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                            <li><a>/</a></li>
+                            <li><a href="{{ path('fos_user_registration_register') }}">Registreer</a></li>
                         </ul>
                     </div>
                 </div>
             {% endblock %}
+            <div id="content">
+            {% block content %}
+                <div class="overviewData">
+                    Er
+                    {% if taskCount < 2 %}
+                        is maar <span>{{ taskCount }}</span> taak
+                    {% else %}
+                        zijn <span>{{ taskCount }}</span> taken
+                    {% endif %}
+                    af te ronden.
+                </div>
+                <div class="tasksIndexOverview">
+                    {% for task in tasks %}
+                        <div class="taskIndex">
+                            <span>{{ task.title }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endblock %}
+            </div>
         </div>
     </div>
 {% endblock %}
