@@ -14,16 +14,25 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $repo = $this->getDoctrine()->getRepository("AppBundle:Tasks");
-        $qTC = $repo->createQueryBuilder('T');
+        $repoT = $this->getDoctrine()->getRepository("AppBundle:Tasks");
+        $qTC = $repoT->createQueryBuilder('T');
         $qTC->select('COUNT(T)');
         $qTC->where('T.taskCheck = :check');
         $qTC->setParameter('check', 0);
 
         $taskCounter = $qTC->getQuery()->getSingleScalarResult();
 
-        $tasks = $repo->findAll();
-        return $this->render('default/index.html.twig', array('taskCount'=>$taskCounter, 'tasks'=>$tasks));
+        $tasks = $repoT->findAll();
+
+        $repoC = $this->getDoctrine()->getRepository("AppBundle:Comments");
+        $qCC = $repoC->createQueryBuilder('C');
+        $qCC->select('COUNT(C)');
+        $qCC->where('C.active = :check');
+        $qCC->setParameter('check', 0);
+
+        $commentCounter = $qCC->getQuery()->getSingleScalarResult();
+
+        return $this->render('default/index.html.twig', array('taskCount'=>$taskCounter, 'tasks'=>$tasks, 'commentCount'=>$commentCounter));
 
         /* replace this example code with whatever you need
         return $this->render('default/index.html.twig', [

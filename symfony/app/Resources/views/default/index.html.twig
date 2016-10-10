@@ -31,10 +31,13 @@
                     {% endif %}
                     af te ronden.
                 </div>
-                <div class="tasksIndexOverview">
+                <div id="tasksIndexOverview">
                     {% for task in tasks %}
                         <div class="taskIndex">
                             <span>{{ task.title }}</span>
+                            <div class="description">
+                                {{ task.description|truncate(60, true) }}
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
