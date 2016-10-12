@@ -23,13 +23,26 @@
             <div id="content">
             {% block content %}
                 <div class="overviewData">
-                    Er
-                    {% if taskCount < 2 %}
+                    <span class="overviewCount">
+                        Er
+                        {% if taskCount < 2 %}
                         is maar <span>{{ taskCount }}</span> taak
-                    {% else %}
+                        {% else %}
                         zijn <span>{{ taskCount }}</span> taken
-                    {% endif %}
-                    af te ronden.
+                        {% endif %}
+                        af te ronden.
+                    </span>
+                    <span class="overviewCount">
+                        Er
+                        {% if commentCount == 0 %}
+                        is geen reactie
+                        {% elseif commentCount < 2 %}
+                        is maar <span>{{ commentCount }}</span> reactie
+                        {% else %}
+                        zijn <span>{{ commentCount }}</span> reacties
+                        {% endif %}
+                        geplaatst.
+                    </span>
                 </div>
                 <div id="tasksIndexOverview">
                     {% for task in tasks %}
