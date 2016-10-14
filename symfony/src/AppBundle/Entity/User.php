@@ -33,10 +33,12 @@ class User extends BaseUser
 
     public function __construct()
     {
-        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new ArrayCollection();
         parent::__construct();
         // your own logic
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->roles = array('ROLE_ADMIN');
+
     }
 
     /**
