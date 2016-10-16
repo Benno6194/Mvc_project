@@ -58,6 +58,11 @@
                             <div class="description">
                                 {{ task.description|truncate(60, true) }}
                             </div>
+                            <div>
+                                {% for user in task.users %}
+                                    {{ user.username }}
+                                {% endfor %}
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
