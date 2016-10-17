@@ -14,16 +14,20 @@ class ProfileController extends Controller
      */
     public function myProfileAction()
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        } else {
+            $user = $this->getUser();
+            $userId = $user->getId();
 
-        $repoU = $this->getDoctrine()->getRepository("AppBundle:User");
-        $queryUser = $repoU->createQueryBuilder('U');
-        $queryUser->where('U.id = :id');
-        $queryUser->setParameter('id', $userId);
+            $repoU = $this->getDoctrine()->getRepository("AppBundle:User");
+            $queryUser = $repoU->createQueryBuilder('U');
+            $queryUser->where('U.id = :id');
+            $queryUser->setParameter('id', $userId);
 
-        $userInfo = $queryUser->getQuery()->getResult();
+            $userInfo = $queryUser->getQuery()->getResult();
 
-        return $this->render('profile/myProfile.html.twig', array('userInfo'=>$userInfo));
+            return $this->render('profile/myProfile.html.twig', array('userInfo' => $userInfo));
+        }
     }
 }
