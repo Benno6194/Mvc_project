@@ -1,7 +1,16 @@
 {% extends 'default/index.html.twig' %}
 
 {% block content %}
+    <form method="get" action="{{ path('myProfile') }}" class="userInfoForm">
     {% for Uinfo in userInfo %}
-        {{ Uinfo.username }}
+        <label>Username</label>
+        <input type="text" value="{{ Uinfo.username }}" required />
+        <label>Email</label>
+        <input type="email" value="{{ Uinfo.email }}" required />
+        <label>Address</label>
+        <input type="text" value="..." />
+        <label>Birthday</label>
+        <input type="date" />
     {% endfor %}
+    </form>
 {% endblock %}

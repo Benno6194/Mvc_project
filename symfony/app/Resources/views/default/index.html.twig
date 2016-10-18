@@ -14,9 +14,9 @@
                         <ul>
                             <li><a class="webTitle" href="{{ path('index') }}">Task Manager </a></li>
                             {% if is_granted('ROLE_ADMIN') %}
-                                <li><a href="{{ path('myProfile') }}">Mijn Profiel</a></li>
-                                <li><a>Mijn Taken</a></li>
-                                <li><a>Mijn Reacties</a></li>
+                                <li><a href="{{ path('myProfile') }}">Profile</a></li>
+                                <li><a>Tasks</a></li>
+                                <li><a>Comments</a></li>
                                 <li style="float:right;"><a href="{{ path('logout') }}">Log uit</a></li>
                             {% else %}
                                 <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>

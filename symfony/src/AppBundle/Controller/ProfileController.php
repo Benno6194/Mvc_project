@@ -30,4 +30,5 @@ class ProfileController extends Controller
             return $this->render('profile/myProfile.html.twig', array('userInfo' => $userInfo));
         }
     }
+
 }
