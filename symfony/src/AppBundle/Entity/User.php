@@ -21,8 +21,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tasks", inversedBy="users")
-     * @ORM\JoinTable(name="User_Tasks")
+     * @ORM\ManyToOne(targetEntity="Tasks", inversedBy="users")
      */
     private $tasks;
 
@@ -107,5 +106,19 @@ class User extends BaseUser
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set tasks
+     *
+     * @param \AppBundle\Entity\Tasks $tasks
+     *
+     * @return User
+     */
+    public function setTasks(\AppBundle\Entity\Tasks $tasks = null)
+    {
+        $this->tasks = $tasks;
+
+        return $this;
     }
 }

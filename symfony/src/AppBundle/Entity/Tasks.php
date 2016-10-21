@@ -50,7 +50,8 @@ class Tasks{
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tasks")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
 
@@ -65,10 +66,10 @@ class Tasks{
 
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-
         parent::__construct();
         // your own logic
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -291,5 +292,19 @@ class Tasks{
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set users
+     *
+     * @param \AppBundle\Entity\User $users
+     *
+     * @return Tasks
+     */
+    public function setUsers(\AppBundle\Entity\User $users = null)
+    {
+        $this->users = $users;
+
+        return $this;
     }
 }
