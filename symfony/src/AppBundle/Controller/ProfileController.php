@@ -31,4 +31,12 @@ class ProfileController extends Controller
         }
     }
 
+    /**
+     * @Route("profile/settings/edit", name="editProfile")
+     */
+    public function editProfileAction()
+    {
+
+    }
+
 }

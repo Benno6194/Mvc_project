@@ -35,7 +35,11 @@ class Comments{
      */
     private $userId;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Tasks", inversedBy="comments")
+     * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
+     */
+    private $taskId;
 
     /**
      * Get id
@@ -117,5 +121,29 @@ class Comments{
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * Set taskId
+     *
+     * @param \AppBundle\Entity\Tasks $taskId
+     *
+     * @return Comments
+     */
+    public function setTaskId(\AppBundle\Entity\Tasks $taskId = null)
+    {
+        $this->taskId = $taskId;
+
+        return $this;
+    }
+
+    /**
+     * Get taskId
+     *
+     * @return \AppBundle\Entity\Tasks
+     */
+    public function getTaskId()
+    {
+        return $this->taskId;
     }
 }

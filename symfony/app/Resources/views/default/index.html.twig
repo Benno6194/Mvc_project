@@ -63,6 +63,11 @@
                                     {{ user.username }}
                                 {% endfor %}
                             </div>
+                            <div>
+                                {% for comment in task.comments %}
+                                    {{ comment.description }}
+                                {% endfor %}
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

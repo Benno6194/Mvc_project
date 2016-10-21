@@ -44,9 +44,24 @@ class Tasks{
     private $taskCheck;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="tasks")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    private $category;
+
+    /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="tasks")
      */
     private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comments", mappedBy="task")
+     */
+    private $comments;
+
+    /**
+     * Tasks constructor.
+     */
 
     public function __construct()
     {
@@ -187,6 +202,30 @@ class Tasks{
     }
 
     /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Categories $category
+     *
+     * @return Tasks
+     */
+    public function setCategory(\AppBundle\Entity\Categories $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Categories
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
      * Add user
      *
      * @param \AppBundle\Entity\User $user
@@ -218,5 +257,39 @@ class Tasks{
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comments $comment
+     *
+     * @return Tasks
+     */
+    public function addComment(\AppBundle\Entity\Comments $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comments $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comments $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

@@ -32,7 +32,9 @@ class DefaultController extends Controller
 
         $commentCounter = $qCC->getQuery()->getSingleScalarResult();
 
-        return $this->render('default/index.html.twig', array('taskCount'=>$taskCounter, 'tasks'=>$tasks, 'commentCount'=>$commentCounter));
+        $comments = $repoC->findAll();
+
+        return $this->render('default/index.html.twig', array('taskCount'=>$taskCounter, 'tasks'=>$tasks, 'commentCount'=>$commentCounter, 'comments'=>$comments));
 
         /* replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
