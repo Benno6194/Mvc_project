@@ -39,7 +39,7 @@ class Comments{
      * @ORM\ManyToOne(targetEntity="Tasks", inversedBy="comments")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
      */
-    private $taskId;
+    private $task;
 
 
     public function __construct()
