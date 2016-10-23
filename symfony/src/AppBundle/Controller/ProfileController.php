@@ -39,4 +39,29 @@ class ProfileController extends Controller
 
     }
 
+    /**
+     * @Route("profile/tasks", name="myTasks")
+     */
+    public function myTasksAction()
+    {
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+        $repoT = $this->getDoctrine()->getRepository("AppBundle:Tasks");
+        $queryTask = $repoT->createQueryBuilder('T');
+        $queryTask->where('T.users = :id');
+        $queryTask->setParameter('id', $userId);
+
+        $taskInfo = $queryTask->getQuery()->getResult();
+
+        return $this->render("profile/myTasks.html.twig", array('tasks'=>$taskInfo));
+    }
+
+    /**
+     * @Route("profile/comments", name="myComments")
+     */
+    public function myCommentsAction()
+    {
+        return $this->render("profile/myComments.html.twig");
+    }
 }

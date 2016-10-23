@@ -21,7 +21,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tasks", inversedBy="users")
+     * @ORM\OneToMany(targetEntity="Tasks", mappedBy="users")
      */
     private $tasks;
 
@@ -35,7 +35,6 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
         $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new ArrayCollection();
         $this->roles = array('ROLE_ADMIN');
 
     }
