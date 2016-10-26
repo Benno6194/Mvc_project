@@ -14,27 +14,13 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $repoT = $this->getDoctrine()->getRepository("AppBundle:Tasks");
-        $qTC = $repoT->createQueryBuilder('T');
-        $qTC->select('COUNT(T)');
-        $qTC->where('T.taskCheck = :check');
-        $qTC->setParameter('check', 0);
+        $tasks = $this->getDoctrine()->getRepository("AppBundle:Tasks")->findAll();
+        $taskCounter = count($tasks);
 
-        $taskCounter = $qTC->getQuery()->getSingleScalarResult();
+        $comments = $this->getDoctrine()->getRepository("AppBundle:Comments")->findBy(array("active"=>true));
+        $commentsCounter = count($comments);
 
-        $tasks = $repoT->findAll();
-
-        $repoC = $this->getDoctrine()->getRepository("AppBundle:Comments");
-        $qCC = $repoC->createQueryBuilder('C');
-        $qCC->select('COUNT(C)');
-        $qCC->where('C.active = :check');
-        $qCC->setParameter('check', 0);
-
-        $commentCounter = $qCC->getQuery()->getSingleScalarResult();
-
-        $comments = $repoC->findAll();
-
-        return $this->render('default/index.html.twig', array('taskCount'=>$taskCounter, 'tasks'=>$tasks, 'commentCount'=>$commentCounter, 'comments'=>$comments));
+        return $this->render('default/index.html.twig', array('taskCount'=>$taskCounter, 'tasks'=>$tasks, 'commentCount'=>$commentsCounter, 'comments'=>$comments));
 
         /* replace this example code with whatever you need
         return $this->render('default/index.html.twig', [

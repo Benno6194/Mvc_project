@@ -50,8 +50,7 @@ class Tasks{
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="tasks")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="tasks")
      */
     private $users;
 

@@ -2,7 +2,11 @@
 
 {% block content %}
     {% for task in tasks %}
-        {{ task.title }}
-        {{ task.description }}
+        <div class="taskIndex">
+            <div class="titleTask">{{ task.title }}</div>
+            <div class="description">
+                {{ task.description }}
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}

@@ -14,21 +14,8 @@ class ProfileController extends Controller
      */
     public function myProfileAction()
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException();
-        } else {
-            $user = $this->getUser();
-            $userId = $user->getId();
-
-            $repoU = $this->getDoctrine()->getRepository("AppBundle:User");
-            $queryUser = $repoU->createQueryBuilder('U');
-            $queryUser->where('U.id = :id');
-            $queryUser->setParameter('id', $userId);
-
-            $userInfo = $queryUser->getQuery()->getResult();
-
-            return $this->render('profile/myProfile.html.twig', array('userInfo' => $userInfo));
-        }
+        $userInfo = $this->getUser();
+        return $this->render('profile/myProfile.html.twig', array('userInfo' => $userInfo));
     }
 
     /**
@@ -44,16 +31,7 @@ class ProfileController extends Controller
      */
     public function myTasksAction()
     {
-        $user = $this->getUser();
-        $userId = $user->getId();
-
-        $repoT = $this->getDoctrine()->getRepository("AppBundle:Tasks");
-        $queryTask = $repoT->createQueryBuilder('T');
-        $queryTask->where('T.users = :id');
-        $queryTask->setParameter('id', $userId);
-
-        $taskInfo = $queryTask->getQuery()->getResult();
-
+        $taskInfo = $this->getUser()->getTasks();
         return $this->render("profile/myTasks.html.twig", array('tasks'=>$taskInfo));
     }
 

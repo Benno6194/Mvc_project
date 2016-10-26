@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link href="{{ asset('Css/style.css') }}" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('Plugins/fontello/css/fontello.css') }}" />
 {% endblock %}
 
 {% block body %}
@@ -54,17 +55,20 @@
                 <div id="tasksIndexOverview">
                     {% for task in tasks %}
                         <div class="taskIndex">
-                            <span>{{ task.title }}</span>
+                            <a href="" style="  "><span class="icon-cancel"></span></a>
+                            <div class="titleTask">{{ task.title }}</div>
                             <div class="description">
-                                {{ task.description|truncate(60, true) }}
+                                {{ task.description|truncate(40, true) }}
                             </div>
-                            <div>
-                                <p>Gebruiker: {{ task.users.username }}</p>
-                            </div>
-                            <div>
-                                {% for comment in comments %}
-                                    {{ loop.length }}
+                            <div class="taskUsers">
+                                <p>
+                                    Taak gebruikers:
+                                {% for user in task.users %}
+                                        <ul>
+                                            <li>{{ user.username }}</li>
+                                        </ul>
                                 {% endfor %}
+                                </p>
                             </div>
                         </div>
                     {% endfor %}
