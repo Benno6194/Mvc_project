@@ -68,6 +68,7 @@ class Tasks{
         parent::__construct();
         // your own logic
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
