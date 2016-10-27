@@ -36,6 +36,14 @@ class ProfileController extends Controller
     }
 
     /**
+     * @Route("profile/tasks/create", name="createTask")
+     */
+    public function createTaskAction()
+    {
+
+    }
+
+    /**
      * @Route("profile/comments", name="myComments")
      */
     public function myCommentsAction()

@@ -4,7 +4,19 @@
     <link href="{{ asset('Css/style.css') }}" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('Plugins/fontello/css/fontello.css') }}" />
 {% endblock %}
-
+{% block javascript %}
+<script>
+    function archiveFunction()
+    {
+        var r=confirm("Weet je zeker dat je het dit wilt verwijderen?");
+        if(r==true){}
+        else
+        {
+            return false;
+        }
+    }
+</script>
+{% endblock %}
 {% block body %}
     <div id="wrapper">
         <div class="topBar"></div>
@@ -52,10 +64,11 @@
                         geplaatst.
                     </span>
                 </div>
+                <input type="text" name="searchbox"  autocomplete="off" spellcheck="false" />
                 <div id="tasksIndexOverview">
                     {% for task in tasks %}
+                        {% if task.dateTimeTask|date("m/d/Y") >= "now"|date("m/d/Y") %}
                         <div class="taskIndex">
-                            <a href="" style="  "><span class="icon-cancel"></span></a>
                             <div class="titleTask">{{ task.title }}</div>
                             <div class="description">
                                 {{ task.description|truncate(40, true) }}
@@ -64,13 +77,22 @@
                                 <p>
                                     Taak gebruikers:
                                 {% for user in task.users %}
+                                    {% if app.user.username == user.username %}
+                                        <a href="{{ path('archiveTask', {'id':task.id}) }}" class="archiveIconIndex" title="archive" onclick="return archiveFunction()"><span class="icon-cancel"></span></a>
+                                    {% else %}
+                                    {% endif %}
                                         <ul>
                                             <li>{{ user.username }}</li>
                                         </ul>
                                 {% endfor %}
                                 </p>
                             </div>
+                            <div>
+                                <input type="button" name="taskDetailButton" value="Details" class="Button" />
+                            </div>
                         </div>
+                        {% else %}
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endblock %}

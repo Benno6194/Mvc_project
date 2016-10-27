@@ -36,4 +36,12 @@ class DefaultController extends Controller
     {
         return $this->render('admin/admin.html.twig');
     }
+
+    /**
+     * @Route("/index/archive/task/{id}", name="archiveTask")
+     */
+    public function archiveTaskAction($id)
+    {
+        return $this->render('default/index.html.twig');
+    }
 }
